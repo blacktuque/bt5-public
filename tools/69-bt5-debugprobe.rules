@@ -1,0 +1,2 @@
+# Raspberry Pi Debug Probe (CMSIS-DAP), for bt5-badge / probe-rs.
+ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="000c", MODE="660", GROUP="plugdev", TAG+="uaccess"
