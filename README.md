@@ -15,6 +15,11 @@ kiosk builds, the tool they used to edit badges, and the leaderboard. Flash it,
 dump it, pull it apart, run your own scoreboard, or just unlock everything on
 your saber.
 
+**New: `saber-play-fw`, the family edition.** The saber after the con, made
+for play at home: games with best scores, everything unlocked, rainbow
+blades, and battles that still work against sabers on the conference
+firmware. See [Play firmware](#play-firmware).
+
 > **Spoilers ahead.** `bt5-badge` can complete every challenge for you. If you
 > would rather work them out, reverse the firmware first and reach for the
 > tool afterwards.
@@ -29,6 +34,8 @@ your saber.
 | `saber-fw/saber-kiosk-fw` | Saber badge (RP2040) | The **kiosk** firmware for the [scoreboard](scoreboard/README.md): receives and checks progress reports instead of playing. It has no key built in; you load your own with `bt5-badge kiosk-key`. |
 | `saber-fw/saber-admin-fw` | Saber badge (RP2040) | The **organizer** firmware: `saber-social-fw` plus the full Organizer menu, booting straight past calibration. See [Admin firmware](#admin-firmware). |
 | `saber-fw/saber-social-fw` | Saber badge (RP2040) | `saber-fw` plus a **Social** tile that sends the light-show patterns from any badge, and a RAINBOW blade colour. |
+| `saber-fw/saber-play-fw` | Saber badge (RP2040) | The **family edition** for after the con: games with best scores, everything unlocked, no droids or talks. See [Play firmware](#play-firmware). |
+| `saber-fw/README.md` | — | What each saber firmware does, and how to flash it. |
 | `scoreboard/` | Your computer (Linux) + a kiosk saber | **kiosk-host**, the con's leaderboard: reads reports off a kiosk saber and serves the standings page. See [scoreboard/README.md](scoreboard/README.md). |
 | `tools/` | Your computer (Linux) | **bt5-badge**, the organizers' badge tooling: reads, backs up and edits everything the badge saves, and flashes firmware. See [Editing your badge](#editing-your-badge). |
 | `droid-fw/remote_fw.bin` | Remote (CH32V003) | The **bench remote**. Five keys, five badge buttons, used from across the room. |
@@ -102,6 +109,40 @@ within a second or two. J1 has no reset pin.
 
 `tools/bt5-badge-x86_64-linux flash saber-fw/saber-fw` does the same job without
 installing anything (see below).
+
+---
+
+## Play firmware
+
+`saber-play-fw` is the saber after the con, aimed at kids and families.
+There's nothing to earn and nothing to wait for:
+
+- **First boot** asks for a language, a side (Rebel or Empire, which becomes
+  the blade colour) and a name. A badge that went through the con keeps its
+  name, side, duel record and settings.
+- **Games:** Bop it (endless), Swing rush (most swings in 30 seconds),
+  Helicopter (longest spin), Focus your force and Stormtrooper Patrol
+  (fastest time), each with a saved best score, plus Spin Text, which writes
+  your name or battle record in the air.
+- **Everything unlocked:** every language, sound set, ignite style and clash
+  colour, custom and rainbow blades, and a side you can switch any time.
+- **Battles** still work against sabers on the conference firmware, so a
+  family saber can duel any badge from the con.
+- **Reset** in Settings puts the saber back to first boot, for handing it on.
+  Hold Push for 3 seconds.
+
+Droids, talks, Hacker Jeopardy, the CTF flags and scoreboard reports aren't
+in this build. Flash it like any other saber image:
+
+```sh
+cd tools
+./bt5-badge-x86_64-linux backup
+./bt5-badge-x86_64-linux flash ../saber-fw/saber-play-fw
+```
+
+Flash `saber-fw` to go back; your saved data stays on the badge either way.
+The details, including the one battle rule that differs from the conference
+firmware, are in [saber-fw/README.md](saber-fw/README.md).
 
 ---
 
