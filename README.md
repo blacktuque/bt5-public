@@ -35,6 +35,7 @@ own. See [Play firmware](#play-firmware).
 | `saber-fw/saber-admin-fw` | Saber badge (RP2040) | The **organizer** firmware: `saber-social-fw` plus the full Organizer menu, booting straight past calibration. See [Admin firmware](#admin-firmware). |
 | `saber-fw/saber-social-fw` | Saber badge (RP2040) | `saber-fw` plus a **Social** tile that sends the light-show patterns from any badge, and a RAINBOW blade colour. |
 | `saber-fw/saber-play-fw` | Saber badge (RP2040) | The **family edition** for after the con: games with best scores, everything unlocked, no droids or talks. See [Play firmware](#play-firmware). |
+| `saber-fw/saber-play-fw.uf2` | Post-con saber with USB-C | The same family edition as a UF2 file, for drag-and-drop flashing over USB-C. No tools needed. See [Play firmware](#play-firmware). |
 | `saber-fw/README.md` | — | What each saber firmware does, and how to flash it. |
 | `scoreboard/` | Your computer (Linux) + a kiosk saber | **kiosk-host**, the con's leaderboard: reads reports off a kiosk saber and serves the standings page. See [scoreboard/README.md](scoreboard/README.md). |
 | `tools/` | Your computer (Linux) | **bt5-badge**, the organizers' badge tooling: reads, backs up and edits everything the badge saves, and flashes firmware. See [Editing your badge](#editing-your-badge). |
@@ -144,6 +145,20 @@ cd tools
 ./bt5-badge-x86_64-linux backup
 ./bt5-badge-x86_64-linux flash ../saber-fw/saber-play-fw
 ```
+
+**Post-con sabers with a USB-C port** don't need a probe or any tools. Use
+`saber-fw/saber-play-fw.uf2`:
+
+1. Put the batteries in and switch the saber on. The USB-C port carries data
+   only, so it doesn't power the saber.
+2. Plug the saber into your computer.
+3. Hold **bootsel**, press and release **reset**, then let go of bootsel.
+   A drive called `RPI-RP2` appears.
+4. Copy `saber-play-fw.uf2` onto `RPI-RP2`. The drive closes on its own and
+   the saber restarts on the new firmware, keeping its name, side, record
+   and best scores.
+
+The conference badges have no USB port; flash those over SWD as above.
 
 To go back, flash `saber-fw` and then `restore` the backup you made before
 switching: the conference firmware can't read the family edition's saved

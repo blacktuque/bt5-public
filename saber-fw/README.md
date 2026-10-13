@@ -12,6 +12,7 @@ exception is going back from `saber-play-fw`; see
 | `saber-fw` | Attendees | The conference badge firmware. |
 | `saber-social-fw` | Attendees | `saber-fw` plus a Social tile and a RAINBOW blade. |
 | `saber-play-fw` | Families, after the con | The saber as a toy: games with best scores, everything unlocked. |
+| `saber-play-fw.uf2` | Post-con sabers with USB-C | `saber-play-fw` as a UF2 file, for drag-and-drop over USB. |
 | `saber-admin-fw` | Organizers | `saber-social-fw` plus the full Organizer menu. |
 | `saber-kiosk-fw` | The scoreboard | Collects progress reports instead of playing. |
 
@@ -34,6 +35,19 @@ probe-rs download --chip RP2040 --speed 1000 --binary-format elf saber-fw/saber-
 
 Flashing never touches the badge's saved data, its identity or its fleet
 key. To go back, flash another image.
+
+### Over USB-C (post-con sabers)
+
+The post-con sabers have a USB-C port and take `saber-play-fw.uf2` with no
+tools at all, from Windows, macOS or Linux. The port carries data only, so
+put the batteries in and switch the saber on first. Then hold **bootsel**,
+press and release **reset**, and let go of bootsel: a drive called `RPI-RP2`
+appears. Copy `saber-play-fw.uf2` onto it. The drive closes by itself and
+the saber restarts on the new firmware.
+
+The UF2 is made from the `saber-play-fw` ELF here, byte for byte, and covers
+only the firmware (it ends at `0x1032ecfc`), so the saved data and identity
+at the end of flash are kept. The conference badges have no USB port.
 
 ---
 
