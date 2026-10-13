@@ -1,2 +1,4 @@
 # Raspberry Pi Debug Probe (CMSIS-DAP), for bt5-badge / probe-rs.
 ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="000c", MODE="660", GROUP="plugdev", TAG+="uaccess"
+# RP2040 bootrom in BOOTSEL mode (PICOBOOT), for bt5-badge --probe usb.
+ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0003", MODE="660", GROUP="plugdev", TAG+="uaccess"

@@ -25,17 +25,29 @@ If you'd rather use the test points, `TP4` is SWCLK and `TP3` is SWDIO.
 **J2 is power, not SWD.** Don't wire the probe to it. Use short jumpers and
 always connect ground.
 
+### Over USB instead
+
+A board with a USB-C port wired to the RP2040 needs no probe. The conference
+badges don't have one. Put the badge in **BOOTSEL mode**: hold the BOOTSEL
+button (U14) while you power it on. It shows up as `RP2 Boot` and doesn't
+run its firmware. The batteries must be in, because the USB-C port doesn't
+power the badge. Then pass `--probe usb` to any command (or pick it from the
+list when asked). Read-only commands leave the badge in BOOTSEL mode, ready
+for the next one. A command that writes reboots it into its firmware. Power-
+cycle the badge to leave BOOTSEL without writing. `--speed` doesn't apply.
+
 ## Setup
 
 Run these from this directory:
 
 ```sh
-# Linux, once: let your user open the probe, then unplug and replug it
+# Linux, once: let your user open the probe (and a badge in BOOTSEL mode),
+# then unplug and replug it
 sudo cp 69-bt5-debugprobe.rules /etc/udev/rules.d/
 sudo udevadm control --reload-rules && sudo udevadm trigger
 
 chmod +x bt5-badge-x86_64-linux          # bt5-badge-aarch64-linux on a 64-bit Pi
-./bt5-badge-x86_64-linux probes          # the probe should show up
+./bt5-badge-x86_64-linux probes          # the probe (or usb:BUS:ADDR) should show up
 ./bt5-badge-x86_64-linux show            # everything the badge has saved
 ```
 
@@ -86,7 +98,8 @@ making it. After a write, the tool resets the badge. `bt5-badge <command>
 - `--speed` sets the SWD clock in kHz. The default, 1000, is safe on jumper
   wires. On short wiring, `--speed 20000` flashes far faster.
 - With more than one probe attached, the tool asks which one to use. To skip
-  the question, pass `--probe VID:PID[:SERIAL]` or set `$PROBE`.
+  the question, pass `--probe VID:PID[:SERIAL]` (or `--probe usb:BUS:ADDR`
+  for a BOOTSEL badge) or set `$PROBE`.
 - If it can't attach to a running badge, power-cycle the badge and try again
   within a second or two.
 - If the saved state fails its signature check (it's been tampered with), the
