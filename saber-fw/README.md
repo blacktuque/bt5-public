@@ -46,7 +46,7 @@ appears. Copy `saber-play-fw.uf2` onto it. The drive closes by itself and
 the saber restarts on the new firmware.
 
 The UF2 is made from the `saber-play-fw` ELF here, byte for byte, and covers
-only the firmware (it ends at `0x1032ecfc`), so the saved data and identity
+only the firmware (it ends at `0x10330d1c`), so the saved data and identity
 at the end of flash are kept. The conference badges have no USB port.
 
 ---
@@ -103,8 +103,22 @@ doesn't go to sleep while it's on.
 
 **Settings:** volume, brightness, name, side, blade colour (your side, a
 custom colour, or rainbow), sound set, ignite style, clash colour, language,
-sleep and reset. Every option is unlocked. **Reset** puts the saber back to first
+sleep, ID and reset. Every option is unlocked. **Reset** puts the saber back to first
 boot: hold Push for 3 seconds while the bar fills.
+
+**Saber ID:** the 4-digit number on the home screen (`#7012`) is what duels
+call a saber by, so two sabers in the same room shouldn't share one.
+- Sabers handed out after the con come numbered from `#7001` up, so no two
+  of them match.
+- A conference badge keeps the number it had.
+- A saber with no number gives itself one the first time it starts, worked
+  out from its flash chip's serial, in `#4000`–`#6FFF`. The same saber always
+  works out the same number, but two different sabers can land on the same
+  one.
+- If two sabers turn out to match, open Settings, go to **ID**, and on one of
+  them hold Push for 3 seconds. It picks a new random number in
+  `#4000`–`#6FFF` and restarts. Name, side, record and settings are kept. The
+  old number can't be had back this way.
 
 **Sleep:** left still with no button pressed for 2 minutes (or 4, or never;
 the Sleep row in Settings), the saber turns off its blade, screen and sound
