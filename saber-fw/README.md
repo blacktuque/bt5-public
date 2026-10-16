@@ -46,7 +46,7 @@ appears. Copy `saber-play-fw.uf2` onto it. The drive closes by itself and
 the saber restarts on the new firmware.
 
 The UF2 is made from the `saber-play-fw` ELF here, byte for byte, and covers
-only the firmware (it ends at `0x10330d1c`), so the saved data and identity
+only the firmware (it ends at `0x103312c4`), so the saved data and identity
 at the end of flash are kept. The conference badges have no USB port.
 
 ---
@@ -126,9 +126,9 @@ and goes to sleep. Pick it up or press any button and it starts again on the
 home screen, with nothing lost. A sleeping saber doesn't answer the SWD
 probe, so wake it before flashing.
 
-**Battles** are between family sabers. Open the Battle page (two crossed
-sabers) and you're ready: a challenge from another saber is accepted on its
-own. Push to challenge. Point the sabers at each other:
+**Battles.** Open the Battle page (two crossed sabers) and you're ready: a
+challenge from another saber is accepted on its own. Push to challenge.
+Point the sabers at each other:
 
 - the countdown names your opponent and counts 5-4-3-2-1, with a click and a
   blade flash on each number;
@@ -136,8 +136,14 @@ own. Push to challenge. Point the sabers at each other:
 - at the end the two sabers swap results on their own and show VICTORY,
   DEFEAT or DRAW with both scores. Keep pointing until they do.
 
-A saber still on the conference firmware can't duel a family saber: the
-family saber waits for a start signal the conference firmware never sends.
+A saber still on the conference firmware can duel a family saber too,
+either side challenging. The conference saber needs its Battle page open,
+and its player presses Push to accept when it says CHALLENGED BY (it never
+accepts on its own). Its screen shows a 4-character battle code where a
+family saber shows a name; the family saber shows the conference saber's
+number. The results swap on their own, with no press on either saber.
+Family firmware from before October 16 didn't manage it, so update the family
+saber first. See https://saberbadge.ca/battle.
 
 **Going back:** the conference images can't read the saved data this
 build writes, and start the badge over without it. Run `bt5-badge backup`
