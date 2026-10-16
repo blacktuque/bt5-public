@@ -46,7 +46,7 @@ appears. Copy `saber-play-fw.uf2` onto it. The drive closes by itself and
 the saber restarts on the new firmware.
 
 The UF2 is made from the `saber-play-fw` ELF here, byte for byte, and covers
-only the firmware (it ends at `0x103312c4`), so the saved data and identity
+only the firmware (it ends at `0x103325a4`), so the saved data and identity
 at the end of flash are kept. The conference badges have no USB port.
 
 ---
@@ -105,6 +105,13 @@ doesn't go to sleep while it's on.
 custom colour, or rainbow), sound set, ignite style, clash colour, language,
 sleep, ID and reset. Every option is unlocked. **Reset** puts the saber back to first
 boot: hold Push for 3 seconds while the bar fills.
+
+**Ignite styles:** besides the four from the con, this build has two of its
+own. **CONFETTI** pops the blade on one light at a time, each a different
+colour, then blends them into the blade colour; turning off pops them away
+again. **HYPERJUMP** sends white streaks racing up the blade faster and
+faster until it flashes white and lights; turning off flashes and pours the
+streaks back into the hilt.
 
 **Saber ID:** the 4-digit number on the home screen (`#7012`) is what duels
 call a saber by, so two sabers in the same room shouldn't share one.
